@@ -44,7 +44,7 @@ def convert():
 #define entry
 input_field = tkinter.Entry(root, width=20)
 output_field = tkinter.Entry(root, width=20)
-equal_field = tkinter.Label(root, text="=", bg="#1B998B")
+equal_field = tkinter.Label(root, text="=", bg="#C2D3CD")
 
 input_field.grid(row=0, column = 0, padx=10, pady=10)
 output_field.grid(row=0, column=2, padx=10, pady=10)
