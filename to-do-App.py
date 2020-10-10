@@ -17,7 +17,26 @@ def add_item():
 def remove_item():
     my_listbox.delete(ANCHOR)
 
+def clear_list():
+    my_listbox.delete(0, END)
 
+def save_list():
+    with open('checklist.txt', 'w') as f:
+        list_tuple = my_listbox.get(0, END)
+        for i in list_tuple:
+            if i.endswith('\n'):
+                f.write(i)
+            else:
+                f.write(i + "\n")
+
+def open_list():
+    try:
+        with open('checklist.txt', 'r') as f:
+            for j in f:
+                my_listbox.insert(END, j)
+    except:
+        return
+    
 
 #create frames
 input_frame = tkinter.Frame(root, bg='#14BDEB')
@@ -42,13 +61,15 @@ my_scrollbar.grid(row=0, column=1, sticky="NS")
 
 #create button frame
 list_remove_button = tkinter.Button(button_frame, text="Remove", bg="#DCCDE8", borderwidth=2, command=remove_item)
-list_clear_button = tkinter.Button(button_frame, text="Clear", bg="#DCCDE8", borderwidth=2)
-save_button = tkinter.Button(button_frame, text="Save", bg='#DCCDE8', borderwidth=2)
+list_clear_button = tkinter.Button(button_frame, text="Clear", bg="#DCCDE8", borderwidth=2, command=clear_list)
+save_button = tkinter.Button(button_frame, text="Save", bg='#DCCDE8', borderwidth=2, command=save_list)
 quit_button = tkinter.Button(button_frame, text="Close", bg="#DCCDE8", borderwidth=2, command=root.destroy)
 list_remove_button.grid(row=0, column=0, padx=2, pady=10)
 list_clear_button.grid(row=0, column=1, padx=2, pady=10)
 save_button.grid(row=0, column=2, padx=2, pady=10)
 quit_button.grid(row=0, column=3, padx=2, pady=10)
 
+#define open the backup list
+open_list()
 
 root.mainloop()
