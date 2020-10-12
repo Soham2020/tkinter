@@ -29,6 +29,40 @@ def operate(operator):
     square_button.config(state=DISABLED)
     decimal_button.config(state=NORMAL)
 
+def equal():  
+    """Run the stored operation for two number."""
+    #Perform the desired mathematics
+    if operation == 'add':
+        value = float(first_number) + float(display.get())
+    elif operation == 'substract':
+        value = float(first_number) - float(display.get())
+    elif operation == 'multiply':
+        value = float(first_number) * float(display.get())
+    elif operation == 'divide':
+        if display.get() == "0":
+            value = "ERROR"
+        else:
+            value = float(first_number) / float(display.get())
+    elif operation == 'exponent':
+        value = float(first_number) ** float(display.get())
+
+    #Remove the curent value of the display and update it with the answer
+    display.delete(0, END)
+    display.insert(0, value)
+
+    #Return buttons to normal states
+    enable_buttons()
+
+
+def enable_buttons():
+    add_button.config(state=NORMAL)
+    substract_button.config(state=NORMAL)
+    multiply_button.config(state=NORMAL)
+    divide_button.config(state=NORMAL)
+    exponent_button.config(state=NORMAL)
+    inverse_button.config(state=NORMAL)
+    square_button.config(state=NORMAL)
+    decimal_button.config(state=NORMAL)
 
 #define frames
 display_frame = tkinter.LabelFrame(root)
@@ -51,7 +85,7 @@ divide_button = tkinter.Button(button_frame, text=" / ", bg="#169873", font=18, 
 multiply_button = tkinter.Button(button_frame, text="*", bg="#169873", font=18, command=lambda : operate("multiply"))
 substract_button = tkinter.Button(button_frame, text="-", bg="#169873", font=18, command=lambda : operate("substract"))
 add_button = tkinter.Button(button_frame, text="+", bg="#169873", font=18, command=lambda : operate("add"))
-equal_button = tkinter.Button(button_frame, text="=", bg="#169873", font=18)
+equal_button = tkinter.Button(button_frame, text="=", bg="#169873", font=18, command=equal)
 decimal_button = tkinter.Button(button_frame, text=".", bg="#169873", font=18, command=lambda : submit_number("."))
 negate_button = tkinter.Button(button_frame, text="+/-", bg="#169873", font=18)
 
