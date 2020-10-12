@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import RIGHT, END, DISABLED
+from tkinter import RIGHT, END, DISABLED, NORMAL
 root = tkinter.Tk()
 root.title('Calculator')
 root.iconbitmap('wave.ico')
@@ -12,6 +12,23 @@ def submit_number(number):
     display.insert(END, number)
     if "." in display.get():
         decimal_button.config(state=DISABLED)
+
+def operate(operator):
+    global first_number
+    global operation
+    operation = operator
+    first_number = display.get()
+    display.delete(0, END)
+    #Dispable all operator buttons until equal or clear is pressed
+    add_button.config(state=DISABLED)
+    substract_button.config(state=DISABLED)
+    multiply_button.config(state=DISABLED)
+    divide_button.config(state=DISABLED)
+    exponent_button.config(state=DISABLED)
+    inverse_button.config(state=DISABLED)
+    square_button.config(state=DISABLED)
+    decimal_button.config(state=NORMAL)
+
 
 #define frames
 display_frame = tkinter.LabelFrame(root)
@@ -29,11 +46,11 @@ quit_button = tkinter.Button(button_frame, text="QUIT", bg="#169873", font=18, c
 
 inverse_button = tkinter.Button(button_frame, text="1/x", bg="#169873", font=18)
 square_button = tkinter.Button(button_frame, text="x^2", bg="#169873", font=18)
-exponent_button = tkinter.Button(button_frame, text="x^n", bg="#169873", font=18)
-divide_button = tkinter.Button(button_frame, text=" / ", bg="#169873", font=18)
-multiply_button = tkinter.Button(button_frame, text="*", bg="#169873", font=18)
-substract_button = tkinter.Button(button_frame, text="-", bg="#169873", font=18)
-add_button = tkinter.Button(button_frame, text="+", bg="#169873", font=18)
+exponent_button = tkinter.Button(button_frame, text="x^n", bg="#169873", font=18, command=lambda : operate("exponent"))
+divide_button = tkinter.Button(button_frame, text=" / ", bg="#169873", font=18, command=lambda : operate("divide"))
+multiply_button = tkinter.Button(button_frame, text="*", bg="#169873", font=18, command=lambda : operate("multiply"))
+substract_button = tkinter.Button(button_frame, text="-", bg="#169873", font=18, command=lambda : operate("substract"))
+add_button = tkinter.Button(button_frame, text="+", bg="#169873", font=18, command=lambda : operate("add"))
 equal_button = tkinter.Button(button_frame, text="=", bg="#169873", font=18)
 decimal_button = tkinter.Button(button_frame, text=".", bg="#169873", font=18, command=lambda : submit_number("."))
 negate_button = tkinter.Button(button_frame, text="+/-", bg="#169873", font=18)
