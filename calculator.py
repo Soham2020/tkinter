@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import RIGHT
+from tkinter import RIGHT, END, DISABLED
 root = tkinter.Tk()
 root.title('Calculator')
 root.iconbitmap('wave.ico')
@@ -7,7 +7,11 @@ root.geometry('300x400')
 root.resizable(0,0)
 root.config(bg="#002A32")
 
-
+#define functions
+def submit_number(number):
+    display.insert(END, number)
+    if "." in display.get():
+        decimal_button.config(state=DISABLED)
 
 #define frames
 display_frame = tkinter.LabelFrame(root)
@@ -21,7 +25,7 @@ display.pack(padx=5, pady=5)
 
 #define button frames
 clear_button = tkinter.Button(button_frame, text="CLEAR", bg="#169873", font=18)
-quit_button = tkinter.Button(button_frame, text="QUIT", bg="#169873", font=18)
+quit_button = tkinter.Button(button_frame, text="QUIT", bg="#169873", font=18, command=root.destroy)
 
 inverse_button = tkinter.Button(button_frame, text="1/x", bg="#169873", font=18)
 square_button = tkinter.Button(button_frame, text="x^2", bg="#169873", font=18)
@@ -31,19 +35,19 @@ multiply_button = tkinter.Button(button_frame, text="*", bg="#169873", font=18)
 substract_button = tkinter.Button(button_frame, text="-", bg="#169873", font=18)
 add_button = tkinter.Button(button_frame, text="+", bg="#169873", font=18)
 equal_button = tkinter.Button(button_frame, text="=", bg="#169873", font=18)
-decimal_button = tkinter.Button(button_frame, text=".", bg="#169873", font=18)
+decimal_button = tkinter.Button(button_frame, text=".", bg="#169873", font=18, command=lambda : submit_number("."))
 negate_button = tkinter.Button(button_frame, text="+/-", bg="#169873", font=18)
 
-nine_button = tkinter.Button(button_frame, text="9", bg="black", fg="white", font=18)
-eight_button = tkinter.Button(button_frame, text="8", bg="black", fg="white", font=18)
-seven_button = tkinter.Button(button_frame, text="7", bg="black", fg="white", font=18)
-six_button = tkinter.Button(button_frame, text="6", bg="black", fg="white", font=18)
-five_button = tkinter.Button(button_frame, text="5", bg="black", fg="white", font=18)
-four_button = tkinter.Button(button_frame, text="4", bg="black", fg="white", font=18)
-three_button = tkinter.Button(button_frame, text="3", bg="black", fg="white", font=18)
-two_button = tkinter.Button(button_frame, text="2", bg="black", fg="white", font=18)
-one_button = tkinter.Button(button_frame, text="1", bg="black", fg="white", font=18)
-zero_button = tkinter.Button(button_frame, text="0", bg="black", fg="white", font=18)
+nine_button = tkinter.Button(button_frame, text="9", bg="black", fg="white", font=18, command=lambda : submit_number(9))
+eight_button = tkinter.Button(button_frame, text="8", bg="black", fg="white", font=18, command=lambda : submit_number(8))
+seven_button = tkinter.Button(button_frame, text="7", bg="black", fg="white", font=18, command=lambda : submit_number(7))
+six_button = tkinter.Button(button_frame, text="6", bg="black", fg="white", font=18, command=lambda : submit_number(6))
+five_button = tkinter.Button(button_frame, text="5", bg="black", fg="white", font=18, command=lambda : submit_number(5))
+four_button = tkinter.Button(button_frame, text="4", bg="black", fg="white", font=18, command=lambda : submit_number(4))
+three_button = tkinter.Button(button_frame, text="3", bg="black", fg="white", font=18, command=lambda : submit_number(3))
+two_button = tkinter.Button(button_frame, text="2", bg="black", fg="white", font=18, command=lambda : submit_number(2))
+one_button = tkinter.Button(button_frame, text="1", bg="black", fg="white", font=18, command=lambda : submit_number(1))
+zero_button = tkinter.Button(button_frame, text="0", bg="black", fg="white", font=18, command=lambda : submit_number(0))
 
 #First row
 clear_button.grid(row=0, column=0, columnspan=2, pady=1, sticky="WE")
